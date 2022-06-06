@@ -20,5 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check cmake
         run: cmake --version
+      - name:
+        run: mkdir build
       - name: Build
         run: cmake --build build --config "Release" --target all -v
