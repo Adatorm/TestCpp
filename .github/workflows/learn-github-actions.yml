@@ -26,3 +26,5 @@ jobs:
         run: cmake --build build --config "Release" --target all -v
       - name: List
         run: ls build
+      - name: Run The app
+        run: ./TestCpp
