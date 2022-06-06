@@ -25,4 +25,4 @@ jobs:
       - name: Build
         run: cmake --build build --config "Release" --target all -v
       - name: List
-        run: ls
+        run: ls build
