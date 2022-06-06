@@ -29,9 +29,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97137c3f-6d5b-4e04-aea0-0d27e7cb408f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    <list default="true" id="97137c3f-6d5b-4e04-aea0-0d27e7cb408f" name="Default Changelist" comment="message">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/learn-github-actions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/learn-github-actions.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +71,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654508063522</updated>
-      <workItem from="1654508065656" duration="106000" />
+      <workItem from="1654508065656" duration="3334000" />
     </task>
+    <task id="LOCAL-00001" summary="message">
+      <created>1654508285468</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654508285468</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,5 +96,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="message" />
+    <option name="LAST_COMMIT_MESSAGE" value="message" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1470" height="225" key="GridCell.Tab.0.bottom" timestamp="1654508179929">
+      <screen x="0" y="38" width="1512" height="865" />
+    </state>
+    <state width="1470" height="225" key="GridCell.Tab.0.bottom/0.38.1512.865@0.38.1512.865" timestamp="1654508179929" />
+    <state width="1470" height="225" key="GridCell.Tab.0.center" timestamp="1654508179928">
+      <screen x="0" y="38" width="1512" height="865" />
+    </state>
+    <state width="1470" height="225" key="GridCell.Tab.0.center/0.38.1512.865@0.38.1512.865" timestamp="1654508179928" />
+    <state width="1470" height="225" key="GridCell.Tab.0.left" timestamp="1654508179928">
+      <screen x="0" y="38" width="1512" height="865" />
+    </state>
+    <state width="1470" height="225" key="GridCell.Tab.0.left/0.38.1512.865@0.38.1512.865" timestamp="1654508179928" />
+    <state width="1470" height="225" key="GridCell.Tab.0.right" timestamp="1654508179928">
+      <screen x="0" y="38" width="1512" height="865" />
+    </state>
+    <state width="1470" height="225" key="GridCell.Tab.0.right/0.38.1512.865@0.38.1512.865" timestamp="1654508179928" />
+    <state x="547" y="388" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654508332163">
+      <screen x="0" y="38" width="1512" height="865" />
+    </state>
+    <state x="547" y="388" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.38.1512.865@0.38.1512.865" timestamp="1654508332163" />
   </component>
 </project>
