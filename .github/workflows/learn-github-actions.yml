@@ -27,4 +27,4 @@ jobs:
       - name: List
         run: ls build
       - name: Run The app
-        run: ./TestCpp
+        run: build/TestCpp
