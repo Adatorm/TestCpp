@@ -20,9 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check cmake
         run: cmake --version
-      - name: configure
-        run: cmake --configure
-      - name: create build folder
-        run: mkdir build
+      - name: Configure
+        run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
       - name: Build
         run: cmake --build build --config "Release" --target all -v
