@@ -1,7 +1,7 @@
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -11,6 +11,7 @@ jobs:
           - os: ubuntu-latest
             asset_name_suffix: ''
             asset_content_type: application/octet-stream
+            release: true
           - os: windows-latest
             asset_name_suffix: .exe
             asset_content_type: application/octet-stream
@@ -31,10 +32,11 @@ jobs:
         run: build/TestCpp
 
       - name: version
-        run: echo "::set-output name=version::test_version"
+        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
         id: version
       - name: release
-        uses: actions/create-release@v1
+        if: matrix.upload
+        uses: actions/create-release@v1s
         id: create_release
         with:
           draft: false
@@ -53,5 +55,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./build/TestCpp${{ matrix.asset_name_suffix }}
-          asset_name: TestCppExec_${{ runner.os }}_${{ github.ref }}${{ matrix.asset_name_suffix }}
+          asset_name: TestCppExec_${{ runner.os }}_${{ version.outputs.version }}${{ matrix.asset_name_suffix }}
           asset_content_type: application/octet-stream
