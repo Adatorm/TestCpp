@@ -1,2 +1,1 @@
-windows and mac support added
-workflow updated
+update support added

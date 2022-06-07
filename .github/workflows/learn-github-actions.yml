@@ -42,10 +42,11 @@ jobs:
           release_name: ${{ github.ref }}
           tag_name: ${{ github.ref }}
           body_path: CHANGELOG.md
+          allowUpdates: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: upload linux artifact
+      - name: upload artifacts
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
