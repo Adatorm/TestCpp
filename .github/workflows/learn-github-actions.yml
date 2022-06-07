@@ -41,14 +41,35 @@ jobs:
       - name: version
         id: version
         run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-        
-      - name: upload artifacts
+
+  
+  release_assets:
+    name: Release assets
+    needs: create_release # we need to know the upload URL
+    runs-on: ${{ matrix.config.os }} # we run many different builds
+    steps:
+      # checkout of cource
+      - name: Checkout code
+        uses: actions/checkout@v1
+      # ... whatever build and packaging steps you need here
+      # and finally do an upload!
+      - name: List current
+        run: ls build
+      - name: List build
+        run: ls build
+      - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./build/TestCpp${{ matrix.asset_name_suffix }}
-          asset_name: TestCppExec_${{ runner.os }}_${{ steps.version.outputs.version }}${{ matrix.asset_name_suffix }}
+          # This is how it will be named on the release page. Put whatever name
+          # you like, remember that they need to be different for each platform.
+          # You can choose any build matrix parameters. For Rust I use the
+          # target triple.
+          asset_name: TestCppExec
+          # The path to the file you want to upload.
+          asset_path: ./build/TestCpp
+          # probably you will need to change it, but most likely you are
+          # uploading a binary file
           asset_content_type: application/octet-stream
-  
