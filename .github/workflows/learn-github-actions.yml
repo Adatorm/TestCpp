@@ -32,8 +32,9 @@ jobs:
         run: build/TestCpp
 
       - name: version
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
         id: version
+        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+        
       - name: release
         if: matrix.upload
         uses: actions/create-release@v1s
