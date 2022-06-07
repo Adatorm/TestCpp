@@ -30,6 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97137c3f-6d5b-4e04-aea0-0d27e7cb408f" name="Default Changelist" comment="message">
+      <change afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/learn-github-actions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/learn-github-actions.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -72,7 +73,8 @@
       <option name="presentableId" value="Default" />
       <updated>1654508063522</updated>
       <workItem from="1654508065656" duration="3436000" />
-      <workItem from="1654521525239" duration="856000" />
+      <workItem from="1654521525239" duration="1455000" />
+      <workItem from="1654599788053" duration="825000" />
     </task>
     <task id="LOCAL-00001" summary="message">
       <created>1654508285468</created>
@@ -104,22 +106,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="message" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1470" height="225" key="GridCell.Tab.0.bottom" timestamp="1654508179929">
+    <state width="1470" height="225" key="GridCell.Tab.0.bottom" timestamp="1654527596542">
       <screen x="0" y="38" width="1512" height="865" />
     </state>
-    <state width="1470" height="225" key="GridCell.Tab.0.bottom/0.38.1512.865@0.38.1512.865" timestamp="1654508179929" />
-    <state width="1470" height="225" key="GridCell.Tab.0.center" timestamp="1654508179928">
+    <state width="1470" height="225" key="GridCell.Tab.0.bottom/0.38.1512.865@0.38.1512.865" timestamp="1654527596542" />
+    <state width="1470" height="225" key="GridCell.Tab.0.center" timestamp="1654527596541">
       <screen x="0" y="38" width="1512" height="865" />
     </state>
-    <state width="1470" height="225" key="GridCell.Tab.0.center/0.38.1512.865@0.38.1512.865" timestamp="1654508179928" />
-    <state width="1470" height="225" key="GridCell.Tab.0.left" timestamp="1654508179928">
+    <state width="1470" height="225" key="GridCell.Tab.0.center/0.38.1512.865@0.38.1512.865" timestamp="1654527596541" />
+    <state width="1470" height="225" key="GridCell.Tab.0.left" timestamp="1654527596541">
       <screen x="0" y="38" width="1512" height="865" />
     </state>
-    <state width="1470" height="225" key="GridCell.Tab.0.left/0.38.1512.865@0.38.1512.865" timestamp="1654508179928" />
-    <state width="1470" height="225" key="GridCell.Tab.0.right" timestamp="1654508179928">
+    <state width="1470" height="225" key="GridCell.Tab.0.left/0.38.1512.865@0.38.1512.865" timestamp="1654527596541" />
+    <state width="1470" height="225" key="GridCell.Tab.0.right" timestamp="1654527596542">
       <screen x="0" y="38" width="1512" height="865" />
     </state>
-    <state width="1470" height="225" key="GridCell.Tab.0.right/0.38.1512.865@0.38.1512.865" timestamp="1654508179928" />
+    <state width="1470" height="225" key="GridCell.Tab.0.right/0.38.1512.865@0.38.1512.865" timestamp="1654527596542" />
     <state x="547" y="388" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654508332163">
       <screen x="0" y="38" width="1512" height="865" />
     </state>

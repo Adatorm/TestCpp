@@ -1,19 +1,8 @@
-name: learn-github-actions
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    tags:
+      - '*'
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
   build:
     runs-on: ubuntu-latest
     steps:
@@ -28,3 +17,21 @@ jobs:
         run: ls build
       - name: Run The app
         run: build/TestCpp
+
+      - name: version
+        run: echo "::set-output name=version::test_version"
+        id: version
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: List2
+        run: ls build
