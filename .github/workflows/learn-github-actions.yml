@@ -3,6 +3,25 @@ on:
     tags:
       - 'v*'
 jobs:
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    # Note this. We are going to use that in further jobs.
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          body: CHANGELOG.md
+
   build:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -35,19 +54,6 @@ jobs:
         id: version
         run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
         
-      - name: release
-        if: matrix.upload
-        uses: actions/create-release@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: false
-          release_name: ${{ github.ref }}
-          tag_name: ${{ github.ref }}
-          body_path: CHANGELOG.md
-          allowUpdates: true
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
 
       - name: upload artifacts
         uses: actions/upload-release-asset@v1
@@ -57,4 +63,38 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./build/TestCpp${{ matrix.asset_name_suffix }}
           asset_name: TestCppExec_${{ runner.os }}_${{ steps.version.outputs.version }}${{ matrix.asset_name_suffix }}
+          asset_content_type: application/octet-stream
+  
+  release_assets:
+    name: Release assets
+    needs: create_release # we need to know the upload URL
+    runs-on: ${{ matrix.config.os }} # we run many different builds
+    strategy:
+      # just an example matrix
+      matrix:
+        config:
+          - os: ubuntu-latest
+          - os: macos-latest
+          - os: windows-latest
+    steps:
+      # checkout of cource
+      - name: Checkout code
+        uses: actions/checkout@v1
+      # ... whatever build and packaging steps you need here
+      # and finally do an upload!
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          # This is how it will be named on the release page. Put whatever name
+          # you like, remember that they need to be different for each platform.
+          # You can choose any build matrix parameters. For Rust I use the
+          # target triple.
+          asset_name: TestCppExec_${{ matrix.config.os }}
+          # The path to the file you want to upload.
+          asset_path: ./path/to/your/file
+          # probably you will need to change it, but most likely you are
+          # uploading a binary file
           asset_content_type: application/octet-stream
