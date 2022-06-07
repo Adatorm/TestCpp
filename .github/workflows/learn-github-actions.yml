@@ -54,9 +54,7 @@ jobs:
       # ... whatever build and packaging steps you need here
       # and finally do an upload!
       - name: List current
-        run: ls build
-      - name: List build
-        run: ls build
+        run: ls
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
