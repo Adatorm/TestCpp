@@ -37,7 +37,7 @@ jobs:
         
       - name: release
         if: matrix.upload
-        uses: actions/create-release@v1s
+        uses: actions/create-release@v1
         id: create_release
         with:
           draft: false
