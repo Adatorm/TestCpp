@@ -30,7 +30,7 @@ jobs:
       - name: Configure
         run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
       - name: Build
-        run: cmake --build build --config "Release" --target all -v
+        run: cmake --build build --config "Release" --target ALL_BUILD -v
       - name: Run The app
         run: build/TestCpp${{ matrix.extension }}
 
@@ -42,7 +42,7 @@ jobs:
         name: upload artifacts
         with:
           name: binary_${{ matrix.name }}
-          path: build/TestCpp_${{ matrix.extension }}
+          path: build/TestCpp${{ matrix.extension }}
 
   
   create_release:
