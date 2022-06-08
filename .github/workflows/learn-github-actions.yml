@@ -39,10 +39,10 @@ jobs:
         run: cmake --build build --config "Release" --target ${{ matrix.build_target }} -v
 
       - name: list
-        run: ls ${{ matrix.release_path }
+        run: ls ${{ matrix.release_path }}
 
       - name: Run The app
-        run: ${{ matrix.release_path }/TestCpp${{ matrix.extension }}
+        run: ${{ matrix.release_path }}/TestCpp${{ matrix.extension }}
 
       - name: version
         id: version
@@ -52,7 +52,7 @@ jobs:
         name: upload artifacts
         with:
           name: binary_${{ matrix.name }}
-          path: ${{ matrix.release_path }/TestCpp${{ matrix.extension }}
+          path: ${{ matrix.release_path }}/TestCpp${{ matrix.extension }}
 
   
   create_release:
