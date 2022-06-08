@@ -3,7 +3,36 @@ on:
     tags:
       - 'v*'
 jobs:
+  
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check cmake
+        run: cmake --version
+      - name: Configure
+        run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
+      - name: Build
+        run: cmake --build build --config "Release" --target all -v
+      - name: List
+        run: ls build
+      - name: Run The app
+        run: build/TestCpp
+
+      - name: version
+        id: version
+        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+      
+      - uses: actions/upload-artifact
+        name: upload artifacts
+        with:
+          name: binary_win
+          path: build/TestCpp
+
+  
   create_release:
+    needs: build
     name: Create release
     runs-on: ubuntu-latest
     # Note this. We are going to use that in further jobs.
@@ -22,29 +51,9 @@ jobs:
           prerelease: false
           body: CHANGELOG.md
 
-  build:
-    runs-on: ubuntu-latest
-    needs: create_release
-    steps:
-      - uses: actions/checkout@v3
-      - name: Check cmake
-        run: cmake --version
-      - name: Configure
-        run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
-      - name: Build
-        run: cmake --build build --config "Release" --target all -v
-      - name: List
-        run: ls build
-      - name: Run The app
-        run: build/TestCpp
-
-      - name: version
-        id: version
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-
   
-  release_assets:
-    name: Release assets
+  update_release:
+    name: update_release
     needs: create_release # we need to know the upload URL
     runs-on: ubuntu-latest # we run many different builds
     steps:
@@ -53,8 +62,12 @@ jobs:
         uses: actions/checkout@v1
       # ... whatever build and packaging steps you need here
       # and finally do an upload!
-      - name: List current
-        run: ls
+      - name: download_artifacts
+        uses: actions/download-artifact
+        with:
+          name: binary_win
+          path: build/TestCpp
+
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
@@ -67,7 +80,7 @@ jobs:
           # target triple.
           asset_name: TestCppExec
           # The path to the file you want to upload.
-          asset_path: ./build/TestCpp
+          asset_path: /build/TestCpp
           # probably you will need to change it, but most likely you are
           # uploading a binary file
           asset_content_type: application/octet-stream
