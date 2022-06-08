@@ -70,7 +70,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: binary_win
-          path: build/TestCpp
+          path: build
       - name: build list
         run: ls build
 
