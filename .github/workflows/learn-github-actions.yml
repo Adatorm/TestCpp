@@ -6,10 +6,6 @@ jobs:
   
 
   build:
-    runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.name }}
-
-
     strategy:
       matrix:
         include: 
@@ -25,6 +21,8 @@ jobs:
             os: macos-latest
             extension: ""
 
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.name }}
     steps:
       - uses: actions/checkout@v3
       - name: Check cmake
@@ -75,7 +73,7 @@ jobs:
   update_release:
     name: update_release
     needs: create_release # we need to know the upload URL
-    runs-on: ${{ matrix.config.os }} # we run many different builds
+    
     
     strategy:
       matrix:
@@ -91,6 +89,7 @@ jobs:
           - name: "macOS"
             os: macos-latest
             extension: ""
+    runs-on: ${{ matrix.config.os }} # we run many different builds
     steps:
       # checkout of cource
       - name: Checkout code
