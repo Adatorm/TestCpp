@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        include: 
+        include:
           - name: "Windows"
             os: windows-latest
             extension: ".exe"
@@ -21,8 +21,8 @@ jobs:
             os: macos-latest
             extension: ""
 
-    runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v3
       - name: Check cmake
@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: cmake --build build --config "Release" --target all -v
       - name: Run The app
-        run: build/TestCpp${{ matrix.config.extension }}
+        run: build/TestCpp${{ matrix.extension }}
 
       - name: version
         id: version
@@ -41,8 +41,8 @@ jobs:
       - uses: actions/upload-artifact@master
         name: upload artifacts
         with:
-          name: binary_${{ matrix.config.name }}
-          path: build/TestCpp_${{ matrix.config.extension }}
+          name: binary_${{ matrix.name }}
+          path: build/TestCpp_${{ matrix.extension }}
 
   
   create_release:
@@ -89,7 +89,7 @@ jobs:
           - name: "macOS"
             os: macos-latest
             extension: ""
-    runs-on: ${{ matrix.config.os }} # we run many different builds
+    runs-on: ${{ matrix.os }} # we run many different builds
     steps:
       # checkout of cource
       - name: Checkout code
@@ -99,8 +99,8 @@ jobs:
       - name: download_artifacts
         uses: actions/download-artifact@master
         with:
-          name: binary_${{ matrix.config.name }}
-          path: export_${{ matrix.config.name }}
+          name: binary_${{ matrix.name }}
+          path: export_${{ matrix.name }}
 
 
       - name: Upload release assets
@@ -113,9 +113,9 @@ jobs:
           # you like, remember that they need to be different for each platform.
           # You can choose any build matrix parameters. For Rust I use the
           # target triple.
-          asset_name: TestCpp_${{ matrix.config.name }}${{ matrix.config.extension }}
+          asset_name: TestCpp_${{ matrix.name }}${{ matrix.extension }}
           # The path to the file you want to upload.
-          asset_path: export_${{ matrix.config.name }}/TestCpp${{ matrix.config.extension }}
+          asset_path: export_${{ matrix.name }}/TestCpp${{ matrix.extension }}
           # probably you will need to change it, but most likely you are
           # uploading a binary file
           asset_content_type: application/octet-stream
