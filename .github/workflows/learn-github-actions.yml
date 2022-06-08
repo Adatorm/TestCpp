@@ -42,7 +42,7 @@ jobs:
         run: ls build
 
       - name: list 3
-        if: matrix.name == "Windows"
+        if: matrix.name == 'Windows'
         run: ls build/Release
 
       - name: Run The app
