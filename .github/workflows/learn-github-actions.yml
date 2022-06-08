@@ -34,6 +34,10 @@ jobs:
         run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
       - name: Build
         run: cmake --build build --config "Release" --target ${{ matrix.build_target }} -v
+
+      - name: list
+        run: ls
+
       - name: Run The app
         run: build/TestCpp${{ matrix.extension }}
 
