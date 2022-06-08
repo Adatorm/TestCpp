@@ -39,6 +39,10 @@ jobs:
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
+      
+      - name: Checkout
+      - uses: actions/checkout@v3
+      
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -70,6 +74,9 @@ jobs:
       - name: permission list
         run: ls build -l
 
+      - name: change permission
+        run: chmod +r build/TestCpp
+
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
@@ -82,7 +89,7 @@ jobs:
           # target triple.
           asset_name: TestCppExec
           # The path to the file you want to upload.
-          asset_path: ./build/TestCpp
+          asset_path: build/TestCpp
           # probably you will need to change it, but most likely you are
           # uploading a binary file
           asset_content_type: application/octet-stream
