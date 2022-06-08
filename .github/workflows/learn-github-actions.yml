@@ -41,6 +41,9 @@ jobs:
       - name: list 2
         run: ls build
 
+      - name: list 3
+        run: ls build/Release
+
       - name: Run The app
         run: build/TestCpp${{ matrix.extension }}
 
