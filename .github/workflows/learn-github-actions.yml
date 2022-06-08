@@ -12,14 +12,17 @@ jobs:
           - name: "Windows"
             os: windows-latest
             extension: ".exe"
+            build_target: "ALL_BUILD"
 
           - name: "Linux"
             os: ubuntu-latest
             extension: ""
+            build_target: "all"
 
           - name: "macOS"
             os: macos-latest
             extension: ""
+            build_target: "all"
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }}
@@ -30,7 +33,7 @@ jobs:
       - name: Configure
         run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
       - name: Build
-        run: cmake --build build --config "Release" --target ALL_BUILD -v
+        run: cmake --build build --config "Release" --target ${{ matrix.build_target }} -v
       - name: Run The app
         run: build/TestCpp${{ matrix.extension }}
 
