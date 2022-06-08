@@ -77,6 +77,15 @@ jobs:
       - name: change permission
         run: chmod +r build/TestCpp
 
+      - name: permission list 2
+        run: ls build -l
+      
+      - name: change permission 2
+        run: chmod a+r build/TestCpp
+      
+      - name: permission list 2
+        run: ls build -l
+
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
