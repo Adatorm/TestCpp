@@ -67,6 +67,10 @@ jobs:
         with:
           name: binary_win
           path: build/TestCpp
+      -name: Test ls
+       run: ls
+      -name: list build
+       run: ls build
 
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
