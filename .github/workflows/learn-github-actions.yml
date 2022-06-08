@@ -67,10 +67,6 @@ jobs:
         with:
           name: binary_win
           path: build/TestCpp
-      - name: Test ls
-        run: ls
-      - name: list build
-        run: ls build
 
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
@@ -84,7 +80,7 @@ jobs:
           # target triple.
           asset_name: TestCppExec
           # The path to the file you want to upload.
-          asset_path: /build/TestCpp
+          asset_path: build/TestCpp
           # probably you will need to change it, but most likely you are
           # uploading a binary file
           asset_content_type: application/octet-stream
