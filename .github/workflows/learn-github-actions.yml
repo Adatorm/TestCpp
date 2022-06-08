@@ -41,8 +41,8 @@ jobs:
       - name: list 2
         run: ls build
 
-      - name: list 3
-        if: contains(${{ matrix.name }},  'Windows')
+      - if: contains(${{ matrix.name }},  'Windows')
+        name: list 3
         run: ls build/Release
 
       - name: Run The app
