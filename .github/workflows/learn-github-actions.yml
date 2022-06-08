@@ -49,7 +49,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          body: CHANGELOG.md
+          body_path: CHANGELOG.md
 
   
   update_release:
@@ -67,6 +67,8 @@ jobs:
         with:
           name: binary_win
           path: build/TestCpp
+      - name: permission list
+        run: ls build -l
 
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
