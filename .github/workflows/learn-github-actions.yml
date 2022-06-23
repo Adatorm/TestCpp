@@ -40,6 +40,10 @@ jobs:
 
       - name: list
         run: ls ${{ matrix.release_path }}
+      
+      - name:
+        if: contains('${{ matrix.name }}', 'macOS')
+        run: uname -a
 
       - name: Run The app
         run: ${{ matrix.release_path }}/TestCpp${{ matrix.extension }}
