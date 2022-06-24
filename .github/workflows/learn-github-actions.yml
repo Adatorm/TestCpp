@@ -1,10 +1,9 @@
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 jobs:
   
-
   build:
     strategy:
       matrix:
@@ -31,10 +30,56 @@ jobs:
     name: ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v3
+
+
+      - uses: robinraju/release-downloader@v1.4
+        name: download dependencies
+        with: 
+          # The source repository path.
+          # Expected format {owner}/{repo}
+          # Default: ${{ github.repository }}
+          repository: Adatorm/ReleaseExample
+          
+          # A flag to set the download target as latest release
+          # The default value is 'false'
+          latest: true
+          
+          # The github tag. e.g: v1.0.1
+          # Download assets from a specific tag/version
+          # tag: ""
+          
+          # The name of the file to download.
+          # Use this field only to specify filenames other than tarball or zipball, if any.
+          # Supports wildcard pattern (eg: '*', '*.deb', '*.zip' etc..)
+          fileName: release.txt
+          
+          # Download the attached tarball (*.tar.gz)
+          # tarBall: true
+          
+          # Download the attached zipball (*.zip)
+          # zipBall: true
+          
+          # Relative path under $GITHUB_WORKSPACE to place the downloaded file(s)
+          # It will create the target directory automatically if not present
+          # eg: out-file-path: "my-downloads" => It will create directory $GITHUB_WORKSPACE/my-downloads
+          out-file-path: dep
+          
+          # Github access token to download files from private repositories
+          # https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+          # eg: token: ${{ secrets.MY_TOKEN }}
+          token:  ${{ secrets.GITHUB_TOKEN }}
+
+          # The URL of the Github API, only use this input if you are using Github Enterprise
+          # Default: "https://api.github.com"
+          # Use http(s)://[hostname]/api/v3 to access the API for GitHub Enterprise Server
+          # github-api-url: ""
+            
       - name: Check cmake
         run: cmake --version
+      
       - name: Configure
         run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX=install
+      
       - name: Build
         run: cmake --build build --config "Release" --target ${{ matrix.build_target }} -v
 
@@ -51,6 +96,12 @@ jobs:
       - name: version
         id: version
         run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+
+      - name: list dependencies
+        run: ls dep
+
+      - name: display dependencies
+        run: more dep/release.txt
       
       - uses: actions/upload-artifact@master
         name: upload artifacts
