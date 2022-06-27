@@ -100,7 +100,7 @@ jobs:
         run: more dep/release.txt
 
       - name: zip file
-        run: zip -- help
+        run: zip --help
 
       - name: list dependencies 2
         run: ls
