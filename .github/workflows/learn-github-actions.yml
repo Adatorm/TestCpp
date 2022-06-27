@@ -98,6 +98,12 @@ jobs:
 
       - name: display dependencies
         run: more dep/release.txt
+
+      - name: zip file
+        run: zip -r dep/release.txt
+
+      - name: list dependencies 2
+        run: ls dep
       
       - uses: actions/upload-artifact@master
         name: upload artifacts
