@@ -100,13 +100,13 @@ jobs:
         run: more dep/release.txt
 
       - name: zip file
-        run: zip -r dep.zip dep
+        run: zip${{ matrix.extension }} -r dep.zip dep
 
       - name: list dependencies 2
         run: ls
       
       - name: unzip file
-        run: unzip dep.zip dep_out
+        run: unzip${{ matrix.extension }} -l -d dep.zip dep_out
 
       - name: list dependencies 3
         run: ls
