@@ -100,10 +100,19 @@ jobs:
         run: more dep/release.txt
 
       - name: zip file
-        run: zip --help
+        run: zip -r dep.zip dep
 
       - name: list dependencies 2
         run: ls
+      
+      - name: unzip file
+        run: unzip dep.zip dep_out
+
+      - name: list dependencies 3
+        run: ls
+
+      - name: list dependencies 4
+        run: ls dep_out
       
       - uses: actions/upload-artifact@master
         name: upload artifacts
