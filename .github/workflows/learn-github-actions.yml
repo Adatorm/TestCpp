@@ -106,6 +106,7 @@ jobs:
         run: ls
       
       - name: unzip file
+        run: mkdir dep_out
         run: unzip${{ matrix.extension }} -l -d dep.zip dep_out
 
       - name: list dependencies 3
