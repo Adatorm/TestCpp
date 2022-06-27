@@ -91,7 +91,7 @@ jobs:
 
       - name: version
         id: version
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=version::$(more version.h)
 
       - name: list dependencies
         run: ls dep
