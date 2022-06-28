@@ -95,13 +95,29 @@ jobs:
 
       - name: version
         id: version
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=version::$(more version.h)
 
       - name: list dependencies
         run: ls dep
 
       - name: display dependencies
         run: more dep/release.txt
+
+      - name: zip file
+        run: 7z a -r dep.zip dep
+
+      - name: list dependencies 2
+        run: ls
+      
+      - name: unzip file
+        run: |
+          7z x dep.zip -odep_out
+
+      - name: list dependencies 3
+        run: ls
+
+      - name: list dependencies 4
+        run: ls dep_out/dep
       
       - uses: actions/upload-artifact@master
         name: upload artifacts
