@@ -9,9 +9,9 @@ class MyVer
 {
 
 public:
-    std::uint8_t major = 0;
-    std::uint8_t minor = 4;
-    std::uint8_t patch = 49;
+    int major = 0;
+    int minor = 4;
+    int patch = 49;
 
     std::string toString() const
     {
