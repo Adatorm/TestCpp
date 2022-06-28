@@ -10,6 +10,6 @@ using namespace std;
 int main()
 {
     MyVer ver;
-    cout << ver.toString() << endl;
+    cout << ver.toString() <<  endl;
     return 0;
 }
