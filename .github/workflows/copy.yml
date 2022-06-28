@@ -91,10 +91,6 @@ jobs:
       - name: Run The app
         run: ${{ matrix.release_path }}/TestCpp${{ matrix.extension }}
 
-      - name: version
-        id: version
-        run: echo ::set-output name=version::$(more version.h)
-
       - name: list dependencies
         run: ls dep
 
@@ -135,6 +131,13 @@ jobs:
       
       - name: Checkout
         uses: actions/checkout@v3
+      
+      - name: build version app
+        run: c++ vertest.cpp -o ver
+
+      - name: fetch version
+        id: version
+        run: echo ::set-output name=version::$(./ver)
       
       - name: Create release
         id: create_release
