@@ -1,7 +1,8 @@
+name: merge to build gg
 on:
   workflow_dispatch:
 jobs:
-name: test-merge
+
   build:
     runs-on: ubuntu-latest
     name: merge to build
