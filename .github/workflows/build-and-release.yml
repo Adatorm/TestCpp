@@ -1,0 +1,21 @@
+name: build and release
+on:
+  push:
+    branches:
+      - build
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    name: merge to build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: build
+
+      - name: build the project
+        run: echo build the project
+      
+      - name: release the project
+        run: echo release the project
+      
