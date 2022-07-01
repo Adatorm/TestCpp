@@ -1,0 +1,26 @@
+name: merge develop to build brench
+
+
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: true
+
+jobs:
+  merge_to_build:
+  name: merge develop brench to build brench
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: develop
+
+    - name: Merge develop -> build
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        from_branch: develop
+        target_branch: build
+        github_token: ${{ github.token }}
+      
