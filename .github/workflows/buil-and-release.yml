@@ -1,11 +1,10 @@
-name: build and release
+name: build and releaseEd
 on:
   workflow_run:
     workflows: ["merge to build"]
     types:
       - completed
 jobs:
-
   build:
     runs-on: ubuntu-latest
     name: merge to build
