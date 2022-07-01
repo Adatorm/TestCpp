@@ -1,4 +1,4 @@
-name: build and releaseE
+name: build and releaseEd
 on:
   workflow_run:
     workflows: ["merge to build"]
