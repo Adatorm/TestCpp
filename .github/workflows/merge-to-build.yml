@@ -11,7 +11,6 @@ jobs:
         with:
           ref: develop
 
-
       - name: Merge development -> staging
         uses: devmasx/merge-branch@master
         with:
