@@ -1,8 +1,9 @@
 name: build and release
 on:
-  pull_request:
-    branches:
-      - build
+  workflow_run:
+    workflows: ["merge to build"]
+    types:
+      - completed
 jobs:
 
   build:
