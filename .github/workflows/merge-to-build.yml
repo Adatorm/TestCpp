@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch:
+jobs:
+name: test-merge
+  build:
+    runs-on: ubuntu-latest
+    name: merge to build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: develop
+
+
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: develop
+          target_branch: build
+          github_token: ${{ github.token }}
+      
