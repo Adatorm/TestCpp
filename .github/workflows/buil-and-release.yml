@@ -1,0 +1,16 @@
+name: build and release
+on:
+  pull_request:
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    name: merge to build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: build
+
+      - name: build the project
+        run: echo build the project
+      
