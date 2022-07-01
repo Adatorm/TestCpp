@@ -9,18 +9,18 @@ on:
 
 jobs:
   merge_to_master:
-  name: merge build brench to main brench
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: build
+    name: merge build brench to main brench
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: build
 
-    - name: Merge build -> main
-      uses: devmasx/merge-branch@master
-      with:
-        type: now
-        from_branch: develop
-        target_branch: main
-        github_token: ${{ github.token }}
-      
+      - name: Merge build -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: develop
+          target_branch: main
+          github_token: ${{ github.token }}
+        
