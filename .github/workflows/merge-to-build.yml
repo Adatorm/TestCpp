@@ -1,11 +1,11 @@
-name: merge to build gg
+name: merge to build
 on:
   workflow_dispatch:
 jobs:
 
   build:
     runs-on: ubuntu-latest
-    name: merge to build
+    name: merge to build job
     steps:
       - uses: actions/checkout@v3
         with:
