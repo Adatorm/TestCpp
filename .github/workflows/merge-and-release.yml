@@ -4,15 +4,10 @@ on:
 jobs:
   merge_to_build_brench:
     uses: ./.github/workflows/merge-to-build-brench.yml
-    with:
-      secrets:
-        token: ${{ github.GITHUB_TOKEN}}
   
   build_and_release:
     needs: merge_to_build_brench
     uses: ./.github/workflows/build-and-release.yml
-    with:
-      secrets: inherit
   
   merge_to_main_brench:
     needs: build_and_release
