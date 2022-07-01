@@ -15,4 +15,4 @@ jobs:
   
   merge_to_main_brench:
     needs: build_and_release
-    uses: ./github/workflows/merge-to-main.yml
+    uses: ./.github/workflows/merge-to-main.yml
