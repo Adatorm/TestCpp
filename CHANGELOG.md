@@ -1,1 +1,1 @@
-windows macos added
+version app added
