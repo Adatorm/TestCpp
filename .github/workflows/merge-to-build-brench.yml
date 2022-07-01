@@ -3,9 +3,6 @@ name: merge develop to build brench
 
 on:
   workflow_call:
-    secrets:
-      token:
-        required: true
 
 jobs:
   merge_to_build:

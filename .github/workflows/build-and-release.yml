@@ -7,9 +7,6 @@ name: build and release
 
 on:
   workflow_call:
-    secrets:
-      token:
-        required: true
 
 
 jobs:
