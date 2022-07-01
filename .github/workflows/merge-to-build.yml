@@ -1,4 +1,4 @@
-name: test-merge-desu
+name: merge to build gg
 on:
   workflow_dispatch:
 jobs:
