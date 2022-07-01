@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
 jobs:
-name: test-merge
+name: test-merge-desu
   build:
     runs-on: ubuntu-latest
     name: merge to build
