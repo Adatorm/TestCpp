@@ -5,7 +5,8 @@ jobs:
   merge_to_build_brench:
     uses: ./.github/workflows/merge-to-build-brench.yml
     with:
-      secrets: inherit
+      secrets:
+        token: ${{ github.GITHUB_TOKEN}}
   
   build_and_release:
     needs: merge_to_build_brench
