@@ -8,7 +8,8 @@ jobs:
     name: merge develop brench to build brench
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
         with:
           ref: develop
 
@@ -26,11 +27,12 @@ jobs:
   build_and_release:
     needs: merge_to_build_brench
 
-    build:
     runs-on: ubuntu-latest
     name: build and release the project
     steps:
-      - uses: actions/checkout@v3
+      
+      - name: checkout
+        uses: actions/checkout@v3
         with:
           ref: build
         
@@ -59,7 +61,8 @@ jobs:
     name: merge develop brench to build brench
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
         with:
           ref: develop
 
