@@ -17,6 +17,7 @@ def read_version():
 
 def write_version(lines):
     with open(VERSION_FILE, "w") as file:
+        lines = [line + '\n' for line in lines]
         file.writelines(lines)
         
 
