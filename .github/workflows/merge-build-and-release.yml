@@ -48,7 +48,7 @@ jobs:
         run: echo configure project
       
       - name: list variables
-        run: echo ${{ steps.version.major }}.${{ steps.version.minor }}.${{ steps.version.patch }}
+        run: echo ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}
 
       - name: build the project
         run: echo build the project
