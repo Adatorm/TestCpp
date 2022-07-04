@@ -11,13 +11,13 @@ version_convert = {
 def read_version():
     lines = []
     with open(VERSION_FILE) as file:
-        lines = file.readlines()
-        lines = [line.rstrip() for line in lines]
+        version = file.readline()
+        lines = version.split(".")
     return lines
 
 def write_version(lines):
     with open(VERSION_FILE, "w") as file:
-        lines = [line + '\n' for line in lines]
+        lines = '.'.join(lines)
         file.writelines(lines)
         
 
