@@ -39,10 +39,10 @@ jobs:
       - name: fetch version
         id: version
         run: |
-          echo "::set-output name=major::$(python3 get MAJOR)"
-          echo "::set-output name=minor::$(python3 get MINOR)"
+          echo "::set-output name=major::$(python3 ver.py get MAJOR)"
+          echo "::set-output name=minor::$(python3 ver.py get MINOR)"
           python3 increase PATCH
-          echo "::set-output name=patch::$(python3 get PATCH)"
+          echo "::set-output name=patch::$(python3 ver.py get PATCH)"
 
       - name: configure project
         run: echo configure project
