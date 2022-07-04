@@ -1,31 +1,10 @@
-name: merge build and release
+name: build and release
 on:
   workflow_dispatch:
 
 
 jobs:
-  merge_to_build_brench:
-    name: merge develop brench to build brench
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          ref: develop
-
-      - name: Merge develop -> build
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: develop
-          target_branch: build
-          github_token: ${{ github.token }}
-
-
-
-
   build_and_release:
-    needs: merge_to_build_brench
 
     runs-on: ubuntu-latest
     name: build and release the project
@@ -41,14 +20,13 @@ jobs:
         run: |
           echo "::set-output name=major::$(python3 ver.py get MAJOR)"
           echo "::set-output name=minor::$(python3 ver.py get MINOR)"
-          python3 ver.py increase PATCH
           echo "::set-output name=patch::$(python3 ver.py get PATCH)"
 
       - name: configure project
         run: echo configure project
       
       - name: list variables
-        run: echo ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }} nani
+        run: echo ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}-${{ github.run_attempt }} 
 
       - name: build the project
         run: echo build the project
