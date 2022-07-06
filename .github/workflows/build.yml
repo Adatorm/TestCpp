@@ -1,0 +1,195 @@
+name: build
+on:
+#  push:
+#    branches:
+#      - github_actions_test
+
+# to use build_tag -> github.event.inputs.build_tag
+   workflow_dispatch:
+    inputs:
+      build_tag:
+        description: "build tag to test"
+        required: true
+        default: "default_build_tag"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          # - name: "win"
+          #   os: windows-latest
+          #   extension: ".exe"
+          #   release_path: "build/Release"
+          #   arch: x86_64
+        - name: "linux"
+          os: ubuntu-latest
+          extension: ""
+          build_target: "all"
+          release_path: "build"
+          folder_name: "Linux"
+          arch: x86_64
+#
+#         - name: "osx"
+#           os: macos-latest
+#           extension: ""
+#           build_target: "all"
+#           release_path: "build"
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v3
+        name: checkout repository
+        with:
+          ref: github_actions_test
+
+      - name: Check cmake
+        run: cmake --version
+
+      - uses: robinraju/release-downloader@v1.4
+        name: Load dependencies
+        with: 
+          # The source repository path.
+          # Expected format {owner}/{repo}
+          # Default: ${{ github.repository }}
+          repository: Adatorm/opencv-builder
+          
+          # A flag to set the download target as latest release
+          # The default value is 'false'
+          latest: true
+          
+          # The github tag. e.g: v1.0.1
+          # Download assets from a specific tag/version
+          # tag: ""
+          
+          # The name of the file to download.
+          # Use this field only to specify filenames other than tarball or zipball, if any.
+          # Supports wildcard pattern (eg: '*', '*.deb', '*.zip' etc..)
+          fileName: opencv-${{ matrix.name }}.zip
+          
+          # Download the attached tarball (*.tar.gz)
+          tarBall: true
+          
+          # Download the attached zipball (*.zip)
+          zipBall: true
+          
+          # Relative path under $GITHUB_WORKSPACE to place the downloaded file(s)
+          # It will create the target directory automatically if not present
+          # eg: out-file-path: "my-downloads" => It will create directory $GITHUB_WORKSPACE/my-downloads
+          out-file-path: dep
+          
+          # Github access token to download files from private repositories
+          # https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+          # eg: token: ${{ secrets.MY_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          # The URL of the Github API, only use this input if you are using Github Enterprise
+          # Default: "https://api.github.com"
+          # Use http(s)://[hostname]/api/v3 to access the API for GitHub Enterprise Server
+          # github-api-url: ""
+        
+        run: unzip opencv-${{ matrix.name }}.zip
+
+      - name: Configure
+        run: echo configure
+      
+      - name: Build
+        run: |
+          mkdir build
+          mkdir build/Unity
+          mkdir build/Unity/${{ matrix.folder_name }}
+          touch build/ggwp.txt
+          
+
+      - name: list
+        run: ls build
+      
+      - uses: actions/upload-artifact@master
+        name: upload artifacts
+        with:
+          name: build_${{ matrix.name }}_${{ matrix.arch }}
+          path: build/Unity
+
+  
+  create_release:
+    needs: build
+    name: Create release
+    runs-on: ubuntu-latest
+    # Note this. We are going to use that in further jobs.
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: get version
+        id: version
+        # run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=version::${{ inputs.build_tag}}
+      
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: v${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: false
+          body_path: CHANGELOG.md
+
+  
+  update_release:
+    name: update_release
+    needs: create_release # we need to know the upload URL
+          #- name: "Linux"
+          #  os: ubuntu-latest
+          #  extension: ""
+
+          #- name: "macOS"
+          #  os: macos-latest
+          #  extension: ""
+    runs-on: ubuntu-latest # we run many different builds
+    steps:
+      # checkout of cource
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # ... whatever build and packaging steps you need here
+      # and finally do an upload!
+      - name: download_artifacts
+        uses: actions/download-artifact@master
+        with:
+          path: build/Unity
+      
+      - name: list artifact
+        run: ls build/Unity
+      
+      - name: move artifacts
+        run: |
+          mv build/Unity/build_linux_x86_64/Linux build/Unity/Linux
+          rmdir build/Unity/build_linux_x86_64
+        
+      - name: zip artifacts
+        run: zip -r ${{ matrix.name }}_${{ matrix.arch }}.zip build/Unity
+        run: 7z a -r test.zip ./build/Unity
+
+
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          # This is how it will be named on the release page. Put whatever name
+          # you like, remember that they need to be different for each platform.
+          # You can choose any build matrix parameters. For Rust I use the
+          # target triple.
+          asset_name: test.zip
+          # The path to the file you want to upload.
+          asset_path: test.zip
+          # probably you will need to change it, but most likely you are
+          # uploading a binary file
+          asset_content_type: application/zip
