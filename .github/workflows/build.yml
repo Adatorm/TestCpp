@@ -1,11 +1,11 @@
-name: build
+name: build project
 on:
 #  push:
 #    branches:
 #      - github_actions_test
 
 # to use build_tag -> github.event.inputs.build_tag
-   workflow_dispatch:
+  workflow_dispatch:
     inputs:
       build_tag:
         description: "build tag to test"
