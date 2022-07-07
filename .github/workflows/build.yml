@@ -89,6 +89,7 @@ jobs:
           # Use http(s)://[hostname]/api/v3 to access the API for GitHub Enterprise Server
           # github-api-url: ""
         
+      - name: unzip dependency
         run: unzip opencv-${{ matrix.name }}.zip
 
       - name: Configure
