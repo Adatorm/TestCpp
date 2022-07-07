@@ -43,6 +43,9 @@ def program():
             value += 1
             lines[index] = str(value)
             write_version(lines)
+        elif sys.argv[1] == "get" and sys.argv[2].lower() == "all":
+            lines = read_version()
+            print(".".join(lines))
         else:
             print("bad input")
             print_usage()
