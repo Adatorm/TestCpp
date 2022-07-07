@@ -178,6 +178,18 @@ jobs:
         run: |
           mv build/Unity/build_linux_x86_64/Linux build/Unity/Linux
           rmdir build/Unity/build_linux_x86_64
+
+          mv build/Unity/build_win_x86_64/Windows build/Unity/Windows
+          rmdir build/Unity/build_win_x86_64/Windows
+
+          mv build/Unity/build_osx_x86_64/macOS build/Unity/macOS
+          rmdir build/Unity/build_osx_x86_64/macOS
+
+          mv build/Unity/build_ios_arm64/iOS build/Unity/iOS
+          rmdir build/Unity/build_ios_arm64/iOS
+
+          mv build/Unity/build_android_arm64-v8a/Android build/Unity/Android
+          rmdir build/Unity/build_android_arm64-v8a/Android
         
       - name: zip artifacts
         run: 7z a -r test.zip ./build/Unity
