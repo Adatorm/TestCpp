@@ -174,7 +174,6 @@ jobs:
           rmdir build/Unity/build_linux_x86_64
         
       - name: zip artifacts
-        run: zip -r ${{ matrix.name }}_${{ matrix.arch }}.zip build/Unity
         run: 7z a -r test.zip ./build/Unity
 
 
