@@ -106,7 +106,7 @@ jobs:
           mkdir build
           mkdir build/Unity
           mkdir build/Unity/${{ matrix.folder_name }}
-          touch build/ggwp.txt
+          touch build/Unity/${{ matrix.folder_name }}/ggwp.txt
           
 
       - name: list
@@ -134,7 +134,7 @@ jobs:
       - name: get version
         id: version
         # run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-        run: echo ::set-output name=version::${{ inputs.build_tag}}
+        run: echo ::set-output name=version::${{ inputs.build_tag }}
       
       - name: Create release
         id: create_release
@@ -142,7 +142,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: v${{ steps.version.outputs.version }}
           release_name: v${{ steps.version.outputs.version }}
           draft: false
           prerelease: false
