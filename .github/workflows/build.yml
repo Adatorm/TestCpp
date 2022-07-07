@@ -151,8 +151,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.version.outputs.version }}.${{ github.run_attempt }}
-          release_name: v${{ steps.version.outputs.version }}.${{ github.run_attempt }}
+          tag_name: v${{ steps.version.outputs.version }}.${{ github.run_number }}.${{ github.run_attempt }}
+          release_name: v${{ steps.version.outputs.version }}.${{ github.run_number }}.${{ github.run_attempt }}
           draft: false
           prerelease: false
           body_path: CHANGELOG.md
