@@ -6,11 +6,6 @@ on:
 
 # to use build_tag -> github.event.inputs.build_tag
   workflow_dispatch:
-    inputs:
-      build_tag:
-        description: "build tag to test"
-        required: true
-        default: "0.1.0"
 
 jobs:
   build:
@@ -143,7 +138,7 @@ jobs:
       - name: get version
         id: version
         # run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-        run: echo ::set-output name=version::${{ inputs.build_tag }}
+        run: echo ::set-output name=version::$(python3 ver.py get all)
       
       - name: Create release
         id: create_release
