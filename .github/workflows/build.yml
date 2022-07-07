@@ -38,7 +38,7 @@ jobs:
           folder_name: "iOS"
         
         - name: "android"
-          os: macos-latest
+          os: ubuntu-latest
           arch: arm64-v8a
           folder_name: "Android"
 
@@ -94,6 +94,9 @@ jobs:
           # Default: "https://api.github.com"
           # Use http(s)://[hostname]/api/v3 to access the API for GitHub Enterprise Server
           # github-api-url: ""
+
+      - name: list download deps
+        run: ls dep
         
       - name: unzip dependency
         run: 7z x dep/opencv-${{ matrix.name }}.zip -odep
