@@ -69,10 +69,10 @@ jobs:
           fileName: opencv-${{ matrix.name }}.zip
           
           # Download the attached tarball (*.tar.gz)
-          tarBall: true
+          tarBall: false
           
           # Download the attached zipball (*.zip)
-          zipBall: true
+          zipBall: false
           
           # Relative path under $GITHUB_WORKSPACE to place the downloaded file(s)
           # It will create the target directory automatically if not present
@@ -90,7 +90,13 @@ jobs:
           # github-api-url: ""
         
       - name: unzip dependency
-        run: unzip opencv-${{ matrix.name }}.zip
+        run: unzip dep/opencv-${{ matrix.name }}.zip
+      
+      - name: ls current
+        run: ls
+
+      - name: ls dep
+        run: ls dep
 
       - name: Configure
         run: echo configure
