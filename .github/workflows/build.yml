@@ -183,15 +183,16 @@ jobs:
           rmdir build/Unity/build_linux_x86_64
 
           mv build/Unity/build_win_x86_64/Windows build/Unity/Windows
+          rmdir build/Unity/build_win_x86_64
 
           mv build/Unity/build_osx_x86_64/macOS build/Unity/macOS
-          rmdir build/Unity/build_osx_x86_64/macOS
+          rmdir build/Unity/build_osx_x86_64
 
           mv build/Unity/build_ios_arm64/iOS build/Unity/iOS
-          rmdir build/Unity/build_ios_arm64/iOS
+          rmdir build/Unity/build_ios_arm64
 
           mv build/Unity/build_android_arm64-v8a/Android build/Unity/Android
-          rmdir build/Unity/build_android_arm64-v8a/Android
+          rmdir build/Unity/build_android_arm64-v8a
         
       - name: zip artifacts
         run: 7z a -r test.zip ./build/Unity
