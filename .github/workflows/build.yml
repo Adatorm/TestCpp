@@ -10,31 +10,37 @@ on:
       build_tag:
         description: "build tag to test"
         required: true
-        default: "default_build_tag"
+        default: "0.1.0"
 
 jobs:
   build:
     strategy:
       matrix:
         include:
-          # - name: "win"
-          #   os: windows-latest
-          #   extension: ".exe"
-          #   release_path: "build/Release"
-          #   arch: x86_64
+        - name: "win"
+          os: windows-latest
+          arch: x86_64
+          folder_name: "Windows"
+
         - name: "linux"
           os: ubuntu-latest
-          extension: ""
-          build_target: "all"
-          release_path: "build"
           folder_name: "Linux"
           arch: x86_64
-#
-#         - name: "osx"
-#           os: macos-latest
-#           extension: ""
-#           build_target: "all"
-#           release_path: "build"
+
+        - name: "osx"
+          os: macos-latest
+          folder_name: "macOS"
+          arch: x86_64
+        
+        - name: "ios"
+          os: macos-latest
+          arch: arm64
+          folder_name: "iOS"
+        
+        - name: "android"
+          os: macos-latest
+          arch: arm64-v8a
+          folder_name: "Android"
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }}
@@ -142,8 +148,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          release_name: v${{ steps.version.outputs.version }}
+          tag_name: v${{ steps.version.outputs.version }}.${{ github.run_attempt }}
+          release_name: v${{ steps.version.outputs.version }}.${{ github.run_attempt }}
           draft: false
           prerelease: false
           body_path: CHANGELOG.md
@@ -152,13 +158,7 @@ jobs:
   update_release:
     name: update_release
     needs: create_release # we need to know the upload URL
-          #- name: "Linux"
-          #  os: ubuntu-latest
-          #  extension: ""
 
-          #- name: "macOS"
-          #  os: macos-latest
-          #  extension: ""
     runs-on: ubuntu-latest # we run many different builds
     steps:
       # checkout of cource
