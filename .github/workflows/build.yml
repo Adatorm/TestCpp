@@ -90,7 +90,7 @@ jobs:
           # github-api-url: ""
         
       - name: unzip dependency
-        run: unzip dep/opencv-${{ matrix.name }}.zip
+        run: 7z x dep/opencv-${{ matrix.name }}.zip -odep
       
       - name: ls current
         run: ls
