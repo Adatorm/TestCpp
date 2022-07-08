@@ -52,7 +52,7 @@ jobs:
       - name: load dep
         uses: dsaltares/fetch-gh-release-asset@master
         with:
-          repo: Adatorm/MyPrivate
+          repo: Adatorm/opencv-builder
           version: v0.1.0
           file: opencv-${{ matrix.name }}.zip
           target: 'dep/opencv-${{ matrix.name }}.zip'
