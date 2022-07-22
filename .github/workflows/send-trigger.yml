@@ -19,7 +19,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.ACCESS_MY_PRIVATE }}
-          event-type: my-event
+          event-type: release-event
           repository: Adatorm/MyPrivate
           client-payload: 
             '{ "message": "anime main"}'
