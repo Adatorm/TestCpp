@@ -21,4 +21,5 @@ jobs:
           token: ${{ secrets.ACCESS_MY_PRIVATE }}
           event-type: my-event
           repository: Adatorm/MyPrivate
-          client-payload: { "message": "anime main"}
+          client-payload: 
+            '{ "message": "anime main"}'
