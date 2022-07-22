@@ -32,8 +32,6 @@ jobs:
         run: echo build the project
 
 
-
-
   update_main_brench_version:
     needs: build_and_release
     name: update main branch version

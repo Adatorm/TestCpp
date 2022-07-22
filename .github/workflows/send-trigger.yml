@@ -1,0 +1,24 @@
+name: send a trigger to another repo
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: testo
+    steps:
+      - uses: actions/checkout@v3
+        name: checkout repository
+        with:
+          ref: main
+
+      - name: Check cmake
+        run: cmake --version
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.ACCESS_MY_PRIVATE }}
+          event-type: my-event
+          repository: Adatorm/MyPrivate
+          client-payload: { "message": "anime main"}
