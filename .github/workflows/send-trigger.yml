@@ -27,4 +27,4 @@ jobs:
           event-type: release-event
           repository: Adatorm/MyPrivate
           client-payload: 
-            '{ "message": ${{ steps.commit.outputs.message }}}'
+            '{ "message": "${{ steps.commit.outputs.message }}"}'
