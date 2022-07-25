@@ -14,6 +14,9 @@ jobs:
 
       - name: Check cmake
         run: cmake --version
+      
+      - name: display commit message
+        run: echo "${{ github.event.head_commit.message }}"
 
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2
