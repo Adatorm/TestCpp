@@ -17,9 +17,7 @@ jobs:
       
       - name: display commit message
         run: | 
-          echo ${{ github.event.commits[0].message }}
           echo ${{ toJSON(github.event) }}
-          echo ${{ toJSON(github.event.commits)}}
         
 
       - name: Repository Dispatch
