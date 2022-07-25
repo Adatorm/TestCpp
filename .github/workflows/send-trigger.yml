@@ -16,8 +16,8 @@ jobs:
         run: cmake --version
       
       - name: display commit message
-        run: | 
-          echo ${{ github.event }}
+        id: commit
+        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
         
 
       - name: Repository Dispatch
@@ -27,4 +27,4 @@ jobs:
           event-type: release-event
           repository: Adatorm/MyPrivate
           client-payload: 
-            '{ "message": "anime main"}'
+            '{ "message": ${{ steps.commit.outputs.message }}}'
