@@ -16,7 +16,12 @@ jobs:
         run: cmake --version
       
       - name: display commit message
-        run: echo "${{ github.event.head_commit.message }}"
+        run: | 
+        echo "${{ github.event.head_commit.message }}"
+        echo ${{ github.event.head_commit.message }}
+        echo ${{ github.event.head_commit }}
+        echo ${{ github.event }}
+        
 
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2
