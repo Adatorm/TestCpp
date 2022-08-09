@@ -40,4 +40,4 @@ jobs:
         uses: geekyeggo/delete-artifact@v1
         with:
           name: |
-            build/Unity/build_name_arch
+            build_name_arch_2
