@@ -1,0 +1,42 @@
+name: artifact test
+on:
+  workflow_dispatch:
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    name: save
+    steps: 
+      - name: echo message
+        run: echo hello world
+
+      - name: create file and folders
+        run: |
+          mkdir build
+          mkdir build/Unity
+          touch build/Unity/file.txt
+
+      - uses: actions/upload-artifact@master
+        name: upload artifacts
+        with:
+          name: build_name_arch
+          path: build/Unity
+      
+      - uses: actions/upload-artifact@master
+        name: upload artifacts
+        with:
+          name: build_name_arch_2
+          path: build/Unity
+  delete:
+    runs-on: ubuntu-latest
+    name: delete
+    steps: 
+
+      - name: echo message
+        run: echo hello world
+
+      - name: delete artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            build/Unity/build_name_arch
