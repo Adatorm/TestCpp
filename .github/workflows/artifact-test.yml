@@ -30,6 +30,7 @@ jobs:
   delete:
     runs-on: ubuntu-latest
     name: delete
+    needs: save
     steps: 
 
       - name: echo message
