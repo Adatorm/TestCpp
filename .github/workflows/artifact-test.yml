@@ -37,7 +37,7 @@ jobs:
         run: echo hello world
 
       - name: delete artifacts
-        uses: geekyeggo/delete-artifact@v1
+        uses: geekyeggo/delete-artifact@master
         with:
           name: |
             build_name_arch_2
